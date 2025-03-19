@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/tables.css">
+    <link rel="stylesheet" href="../css/form.css">
+    <title>Manage Products</title>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+        <div class="content">
+            <h2>Manage Products</h2>
+            <button onclick="openModal('addProductModal')" class="btn">Add Product</button>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock Quantity</th>
+                        <th>Category</th>
+                        <th>Supplier</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="product-table">
+                    <!-- Products will be loaded dynamically -->
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <div id="paginationControls" class="pagination">
+                <!-- Page numbers will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+            <h2>Add New Product</h2>
+            <form id="addProductForm" class="form">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="productDescription" required></textarea>
+
+                <label for="productPrice">Price:</label>
+                <input type="number" id="productPrice" name="productPrice" step="0.01" required>
+
+                <label for="productStockQuantity">Stock Quantity:</label>
+                <input type="number" id="productStockQuantity" name="productStockQuantity" required>
+
+                <label for="productCategory">Category:</label>
+                <select id="productCategory" name="productCategory" required>
+                    <!-- Categories will be loaded dynamically -->
+                </select>
+
+                <label for="productSupplier">Supplier:</label>
+                <select id="productSupplier" name="productSupplier" required>
+                    <!-- Suppliers will be loaded dynamically -->
+                </select>
+
+                <button type="submit" class="btn">Add Product</button>
+            </form>
+            <p id="addProductMessage" class="success-message"></p>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editProductModal')">&times;</span>
+            <h2>Edit Product</h2>
+            <form id="editProductForm" class="form">
+                <input type="hidden" id="editProductId" name="editProductId">
+                <label for="editProductName">Product Name:</label>
+                <input type="text" id="editProductName" name="editProductName" required>
+
+                <label for="editProductDescription">Description:</label>
+                <textarea id="editProductDescription" name="editProductDescription" required></textarea>
+
+                <label for="editProductPrice">Price:</label>
+                <input type="number" id="editProductPrice" name="editProductPrice" step="0.01" required>
+
+                <label for="editProductStockQuantity">Stock Quantity:</label>
+                <input type="number" id="editProductStockQuantity" name="editProductStockQuantity" required>
+
+                <label for="editProductCategory">Category:</label>
+                <select id="editProductCategory" name="editProductCategory" required>
+                    <!-- Categories will be loaded dynamically -->
+                </select>
+
+                <label for="editProductSupplier">Supplier:</label>
+                <select id="editProductSupplier" name="editProductSupplier" required>
+                    <!-- Suppliers will be loaded dynamically -->
+                </select>
+
+                <button type="submit" class="btn">Update Product</button>
+            </form>
+            <p id="editProductMessage" class="success-message"></p>
+        </div>
+    </div>
+
+    <script src="../js/product.js" defer></script>
+    <script src="../js/script.js" defer></script>
+
+</body>
+</html>

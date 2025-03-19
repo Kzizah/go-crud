@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/tables.css">
+    <link rel="stylesheet" href="../css/form.css">
+    <title>Manage Categories</title>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+        <div class="content">
+            <h2>Manage Categories</h2>
+            <button onclick="openModal('addCategoryModal')" class="btn">Add Category</button>
+
+            <!-- ✅ Dropdown to select items per page -->
+            <!-- <label for="itemsPerPage">Show:</label>
+            <select id="itemsPerPage" onchange="changeItemsPerPage()">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+            </select> categories per page. -->
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="category-table">
+                    <!-- Categories will be loaded dynamically -->
+                </tbody>
+            </table>
+
+            <!-- ✅ Pagination Controls -->
+            <div id="paginationControls" class="pagination">
+                <!-- Page numbers will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div id="addCategoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addCategoryModal')">&times;</span>
+            <h2>Add New Category</h2>
+            <form id="addCategoryForm" class="form">
+                <label for="categoryName">Category Name:</label>
+                <input type="text" id="categoryName" name="categoryName" required>
+                <button type="submit" class="btn">Add Category</button>
+            </form>
+            <p id="editMessage" class="success-message"></p>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div id="editCategoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editCategoryModal')">&times;</span>
+            <h2>Edit Category</h2>
+            <form id="editCategoryForm" class="form">
+                <input type="hidden" id="editCategoryId" name="editCategoryId">
+                <label for="editCategoryName">Category Name:</label>
+                <input type="text" id="editCategoryName" name="editCategoryName" required>
+                <button type="submit" class="btn">Update Category</button>
+            </form>
+            <p id="message" class="success-message"></p>
+        </div>
+    </div>
+
+    <!-- View Category Modal -->
+    <div id="viewCategoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('viewCategoryModal')">&times;</span>
+            <h2>View Category</h2>
+            <form id="viewCategoryForm" class="form">
+                <label for="view-category-id">Category ID:</label>
+                <input type="text" id="view-category-id" readonly>
+                <label for="view-category-name">Category Name:</label>
+                <input type="text" id="view-category-name" readonly>
+                <button type="button" onclick="closeModal('viewCategoryModal')">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/category.js" defer></script>
+    <script src="../js/script.js" defer></script>
+
+</body>
+</html>
