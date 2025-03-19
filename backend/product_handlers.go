@@ -10,31 +10,23 @@ import (
 
 // Create Product
 func CreateProduct(c *gin.Context) {
-	var product models.Product
-	if err := c.ShouldBindJSON(&product); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+    var product models.Product
+    if err := c.ShouldBindJSON(&product); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
-	// Ensure the ID is not set (prevent conflicts with auto-increment fields)
-	product.ID = 0
+    if product.Price <= 1 || product.StockQuantity <= 1 {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Price and Stock must be greater than 1"})
+        return
+    }
 
-	if err := config.DB.Create(&product).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+    if err := config.DB.Create(&product).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
 
-	c.JSON(http.StatusOK, product)
-}
-
-// Get All Products
-func GetProducts(c *gin.Context) {
-	var products []models.Product
-	if err := config.DB.Preload("Category").Preload("Supplier").Find(&products).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	c.JSON(http.StatusOK, products)
+    c.JSON(http.StatusOK, product)
 }
 
 // Get Single Product

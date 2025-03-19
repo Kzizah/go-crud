@@ -109,14 +109,17 @@ function populateDropdown(dropdownId, data) {
 // Add a new product
 document.getElementById("addProductForm").addEventListener("submit", async function(event) {
     event.preventDefault();
+
     const productData = {
-        Name: document.getElementById("productName").value,
-        Description: document.getElementById("productDescription").value,
-        Price: parseFloat(document.getElementById("productPrice").value),
-        StockQuantity: parseInt(document.getElementById("productStockQuantity").value),
-        CategoryID: parseInt(document.getElementById("productCategory").value),
-        SupplierID: parseInt(document.getElementById("productSupplier").value)
+        name: document.getElementById("productName").value,
+        description: document.getElementById("productDescription").value,
+        price: parseFloat(document.getElementById("productPrice").value),
+        stock_quantity: parseInt(document.getElementById("productStockQuantity").value),
+        category_id: parseInt(document.getElementById("productCategory").value),
+        supplier_id: parseInt(document.getElementById("productSupplier").value)
     };
+
+    console.log("Captured Product Data before submission:", productData); // ✅ Debugging
 
     try {
         const response = await fetch(PRODUCT_API_URL, {
@@ -127,11 +130,12 @@ document.getElementById("addProductForm").addEventListener("submit", async funct
 
         if (!response.ok) throw new Error("Failed to add product");
 
+        console.log("Product added successfully!");
         document.getElementById("addProductForm").reset();
-        closeModal('addProductModal');
+        closeModal("addProductModal");
         fetchProducts();
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error adding product:", error);
     }
 });
 

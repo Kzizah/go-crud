@@ -3,7 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.text())
         .then(data => {
             document.getElementById("sidebar-container").innerHTML = data;
-            initSidebar(); // Initialize event listeners after sidebar loads
+
+            // Ensure event listeners and links work after sidebar loads
+            setTimeout(() => {
+                initSidebar();
+                activateLinks(); // Initialize sidebar links
+            }, 100);
         })
         .catch(error => console.error("Error loading sidebar:", error));
 
@@ -52,5 +57,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         adjustTableWidth(); // Ensure correct initial width
         menuBtnChange();
+    }
+
+    function activateLinks() {
+        const links = document.querySelectorAll(".nav-list a");
+        if (links.length === 0) {
+            console.error("Sidebar links not found!");
+            return;
+        }
+
+        links.forEach(link => {
+            link.addEventListener("click", (event) => {
+                console.log("Navigating to:", link.href);
+            });
+        });
     }
 });
